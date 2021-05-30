@@ -10,20 +10,8 @@ import LayoutComponent from './template/index';
 //Pages 
 import Home from './views/home/index';
 import CoursePage from './views/course/index';
-
-const ExperimentalComponent:React.FC = () => {
-    return(
-        <div>
-            <h1> Test World , Hello World </h1>
-            <Button color="secondary" variant="contained">
-                Test 
-            </Button>
-            <Button color="primary" variant="contained">
-                Test 
-            </Button>
-        </div>
-    );
-}
+import QuizPage from './views/quiz/index';
+import LinkPage from './views/topic/index';
 
 const ThemedApp = () => {
     const lightState = useSelector((state:any) => state.theme);
@@ -36,7 +24,13 @@ const ThemedApp = () => {
                         <Route exact path = '/' component={Home}/>
                     </Switch>
                     <Switch>
-                        <Route exact path = '/course/:courseid' component={CoursePage} />
+                        <Route exact path = '/course/:courseid/:coursename?' component={CoursePage} />
+                    </Switch>
+                    <Switch>
+                        <Route path ='/quiz/:quizid/:quizname?' component={QuizPage} />
+                    </Switch>
+                    <Switch>
+                        <Route path='/course/:courseid/:coursename?/topic/:topicid' component={LinkPage} />
                     </Switch>
             </LayoutComponent>
             </Router>

@@ -9,7 +9,8 @@ export const lightTheme = createMuiTheme({
     palette: {
         type: 'light',
         primary: blue,
-        secondary: pink,
+        secondary: purple,
+        error: red,
     }
 })
 
