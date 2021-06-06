@@ -1,17 +1,28 @@
 import {useDispatch, useSelector} from 'react-redux';
 import React, {useState, useEffect} from 'react';
 import {StoreState} from '../../store';
-import {Card, CardContent,Dialog, DialogTitle, DialogContent, DialogActions, CardActions, Button, Typography, Grid, IconButton,makeStyles, Checkbox,FormLabel, FormControl, FormGroup, FormControlLabel} from '@material-ui/core';
+import {Card, CardContent,Dialog, DialogTitle, DialogContent, TextField, DialogActions, CardActions, Button, Typography, Grid, IconButton,makeStyles, Checkbox,FormLabel, FormControl, FormGroup, FormControlLabel} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import {addMCQuestion} from '../../actions/action_creators/quiz_action_creators';
 
 const styles = makeStyles(theme => ({
-
+    
 }))
+
+type multipleChoiceState = {
+    show: boolean,
+    question:string,
+    options : string[],
+    answer: number,
+}
 
 const MultipleChoice:React.FC = () => {
     const questions = useSelector((store:StoreState) => store.questions.questions.mc); 
-    const [truths, setTruths] = useState<boolean[]>(questions.map(answer => false))
+    const [truths, setTruths] = useState<boolean[]>(questions.map(answer => false));
     const [answers, setAnswers] = useState<number[]>(questions.map(answer => 0));
+    const [currentQuestion, setQuestion] = useState<multipleChoiceState>({show:false, question:'', options:[''], answer:1});
+
+    const dispatch = useDispatch();
 
     const showIndex = (e:any, index:number) => {
         e.preventDefault();
@@ -23,12 +34,27 @@ const MultipleChoice:React.FC = () => {
         setAnswers([...answers.slice(0,index), answer, ...answers.slice(index+1)]);
     }
 
+    const handleOptionAdd = (e:any) => {
+        e.preventDefault();
+        if(currentQuestion.options.length<5){
+            setQuestion({...currentQuestion, options:[...currentQuestion.options, '']});
+        }
+    }
+
     const shortAnswerDialog = (
         <div>
-            <Dialog open={true}>
+            <Dialog open={currentQuestion.show} onClose={() => setQuestion({...currentQuestion, show:false})}>
                 <DialogTitle></DialogTitle>
-                <DialogContent></DialogContent>
-                <DialogActions></DialogActions>
+                <DialogContent>
+                    <IconButton onClick={handleOptionAdd}> <AddIcon /></IconButton>
+                    <TextField fullWidth onChange={(e) => setQuestion({...currentQuestion, question:e.target.value})}/>
+                    {currentQuestion.options.map((option:string,index:number) => {
+                        return <TextField fullWidth key={index} onChange={(e) => setQuestion({...currentQuestion, options:[...currentQuestion.options.slice(0,index), e.target.value, ...currentQuestion.options.slice(index+1)]})}/>
+                    })}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={(e) => dispatch({'hello':'world'})}> Submit </Button>
+                </DialogActions>
             </Dialog>
         </div>
     );
@@ -60,6 +86,8 @@ const MultipleChoice:React.FC = () => {
 
     return(
         <React.Fragment>
+            {shortAnswerDialog}
+            <IconButton onClick={(e) => setQuestion({...currentQuestion, show:true})}> <AddIcon /></IconButton>
             {questionList}
         </React.Fragment>
     );

@@ -27,8 +27,8 @@ const Auth:React.FC = () => {
             dispatch(OAuthLogin(res.data.username));
         })
     }
-
-    const googleform = <GoogleLogin clientId="651121369384-mcv58qvt3hkhrkdbhqcv957fv0hdggbf.apps.googleusercontent.com" buttonText="login" onSuccess ={successGoogle} onFailure={successGoogle} />
+    // @ts-ignore
+    const googleform = <GoogleLogin clientId={process.env.OAUTHCLIENT} buttonText="login" onSuccess ={successGoogle} onFailure={successGoogle} />
         
     const localLogin = () => {
         dispatch(LoginAction(auth.email, auth.password));
