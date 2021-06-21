@@ -24,7 +24,8 @@ const CourseReducer = (state:DefaultState = DefaultState, action:AddCourse|EditC
         case COURSES_LOADED:
             return {...state, courses: action.payload.courses, loading:false}
         case COURSES_FAILED:
-            return {...state, failed:true}
+            localStorage.removeItem('username');
+            return {...state, loading:false, failed:true}
         case SELECT_COURSE:
             return {...state, selectedCourse : action.payload.id}
         case DELETE_COURSE:

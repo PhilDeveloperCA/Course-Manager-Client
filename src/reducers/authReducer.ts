@@ -9,7 +9,8 @@ type AuthState = {
 
 const InitialState:AuthState = {
     loading : false,
-    authorized : localStorage.getItem("username") !== undefined,
+    //authorized : localStorage.getItem("username") !== undefined,
+    authorized : false,
     username : localStorage.getItem("username") || null,
     failed : false,
 }

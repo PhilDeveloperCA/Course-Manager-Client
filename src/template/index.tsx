@@ -29,6 +29,7 @@ const LayoutComponent:React.FC = ({children}) => {
 
     const darkMode = useSelector((state:any) => state.theme);
 
+    console.log(authState);
 
 
     const handleThemeChange = (event:React.ChangeEvent<HTMLInputElement>) => {
@@ -37,14 +38,14 @@ const LayoutComponent:React.FC = ({children}) => {
         dispatch(action);
     }
 
-    if(!authState.authorized){
+    /*if(!authState.authorized){
         return (
             <React.Fragment>
                 <Auth />
             </React.Fragment>
         );
     }
-    else{
+    else{*/
     return(
         <div className={classes.grow}>
             <AppBar className={classes.grow}>
@@ -66,10 +67,9 @@ const LayoutComponent:React.FC = ({children}) => {
                 </Toolbar>
             </AppBar>
             <div className={classes.toolbar}> </div>
-            {children}
+            {authState.authorized?children:<Auth />}
         </div> 
     );
-    }
 } 
 
 export default LayoutComponent;

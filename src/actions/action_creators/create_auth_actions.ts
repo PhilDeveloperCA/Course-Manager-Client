@@ -2,6 +2,7 @@ import {LOGGING_OUT, AUTH_SUCCEEDED, AUTH_FAILED, AUTH_LOADING, AuthFailed, Auth
 import {Dispatch} from 'redux';
 import axios from 'axios';
 
+
 const base_client = axios.create({
     baseURL: 'localhost:5000/auth',
     withCredentials: true,

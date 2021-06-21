@@ -24,6 +24,7 @@ const reducers = combineReducers({
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
+
 export type StoreState = ReturnType<typeof store.getState>
 
 export default store;
