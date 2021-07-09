@@ -13,7 +13,7 @@ type authState = {
 
 const useStyles = makeStyles((theme => ({
     form:{
-        maxWidth : '30%',
+        maxWidth : 'calc(max(40%,600px))',
         //maxHeight: '400px',
         display : 'flex',
         flexDirection : 'column',
@@ -58,6 +58,8 @@ const Auth:React.FC = () => {
     const googleform = <GoogleLogin clientId={process.env.OAUTHCLIENT} buttonText="login" onSuccess ={successGoogle} onFailure={successGoogle} />
         
     const localLogin = () => {
+        console.log(auth.email)
+        console.log(auth.password)
         dispatch(LoginAction(auth.email, auth.password));
     }
 
@@ -74,6 +76,10 @@ const Auth:React.FC = () => {
         return (
             <React.Fragment>
                 <form className={classes.form}>
+                <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}> 
+                    <Button disabled={!login} onClick={() => setLogin(false)}> Register </Button>
+                    <Button disabled={login} onClick={() => setLogin(true)}> Login </Button>
+                </div>
                     <TextField label="email" onChange={(e) => {setAuth({...auth, email:e.target.value})}}/>
                     <TextField label="username"/>
                     <TextField label="password"/>
@@ -88,9 +94,13 @@ const Auth:React.FC = () => {
         return(
             <React.Fragment>
                 <form className={classes.form}> 
+                <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'space-around'}}> 
+                    <Button disabled={!login} onClick={() => setLogin(false)}> Register </Button>
+                    <Button disabled={login} onClick={() => setLogin(true)}> Login </Button>
+                </div>
                     <TextField className={classes.field} fullWidth={false} label="email" onChange={(e) => {setAuth({...auth, email:e.target.value})}}/>
                     <TextField className={classes.field} fullWidth={false} label="password" onChange={(e) => {setAuth({...auth, password :e.target.value})}}/>
-                    <Button onClick={(e)=>locallogin()}> Submit </Button>
+                    <Button onClick={(e)=>localLogin()}> Submit </Button>
                 </form>
             </React.Fragment>
         );

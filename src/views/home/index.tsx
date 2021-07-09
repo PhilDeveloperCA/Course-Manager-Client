@@ -30,10 +30,12 @@ const Home:React.FC = () => {
 
     return(
         <div> 
-            <Auth />
+            <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
+            <Typography variant="h6"> Add Course: </Typography>
             <IconButton onClick={(e) => {e.preventDefault(); setOpenForm(!openForm)}}>
                 <AddIcon />
             </IconButton>
+            </div> 
             <Dialog open={openForm} onClose={handleClose}>   
                 <DialogTitle> Add Course : </DialogTitle>
                 <DialogContent style={{flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
@@ -43,6 +45,7 @@ const Home:React.FC = () => {
                     <AddCourse name='' description='' />
                 </DialogContent>
             </Dialog>
+            <Grid></Grid>
             <CourseTable />
         </div>
     );

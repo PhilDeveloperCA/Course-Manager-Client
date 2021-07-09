@@ -59,19 +59,23 @@ const CourseTable:React.FC = () => {
 
     const CourseMap = courses.courses?.map((course:Course,index:number) => {
         return(
-            <Grid item key={course.id} xs={12} sm={6}>
-                <Card>
+            <Grid item key={course.id} xs={12} sm={6} container>
+                <Card style={{display:'flex', justifyContent:'space-between', flexDirection:'column', margin:'20px', 
+                padding:'30px'}}>
                     <CardContent>
                         <Typography variant="h4" > {course.name} </Typography>
                         <Typography variant="h6">
                             {course.description}
                         </Typography>
                     </CardContent>
-                    <CardActions>
+                    <div>
+                    <Typography variant="h6"> Started : {course.start_date?course.start_date.split('T')[0]:''}</Typography>
+                    <CardActions style={{flexShrink:0}}>
                         <Button onClick={(e) => {e.preventDefault();setSelected(index)}}> Edit: </Button>
                         <Button onClick={(e) => {e.preventDefault();history.push(`/course/${course.id}/${course.name}`)}}> View: </Button> 
                         <IconButton onClick={(e) => {e.preventDefault(); setDelete(course.id)}}> <DeleteIcon /> </IconButton>
                     </CardActions>
+                    </div>
                 </Card>
             </Grid>
         );
@@ -82,7 +86,9 @@ const CourseTable:React.FC = () => {
     return(
         <div>
              {courses.loading?<CircularProgress color="secondary"/>:null}
-            {CourseMap}
+             <Grid container>
+             {CourseMap}
+             </Grid>
             {EditModal}
             {deleteModal}
         </div>

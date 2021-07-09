@@ -37,20 +37,17 @@ const CoursePage:React.FC = () => {
 
     return(
         <div>
-            <Grid container>
-                <Grid item xs={4} xl={12}>
-                    <Button disabled={courseMode===0} onClick={(e) => handleCourseModeChange(e,0)}> Quiz </Button>
+            <Grid container style={{justifyContent:'center', alignItems:'center'}}>
+                <Grid item xs={4} xl={12} container style={{justifyContent:'center', alignItems:'center'}}>
+                    <Button size="large" disabled={courseMode===0} onClick={(e) => handleCourseModeChange(e,0)}> Quiz </Button>
                 </Grid>
-                <Grid item xs={4} xl={12}>
-                    <Button disabled={courseMode===1} onClick={(e) => handleCourseModeChange(e,1)}> Task </Button>
+                <Grid item xs={4} xl={12}  container style={{justifyContent:'center', alignItems:'center'}}>
+                    <Button size="large"  disabled={courseMode===1} onClick={(e) => handleCourseModeChange(e,1)}> Task </Button>
                 </Grid>
-                <Grid item xs={4} xl={12}>
-                    <Button disabled={courseMode===2} onClick={(e) => handleCourseModeChange(e,2)}> Topics </Button>
+                <Grid item xs={4} xl={12}  container style={{justifyContent:'center', alignItems:'center'}}>
+                    <Button size="large"  disabled={courseMode===2} onClick={(e) => handleCourseModeChange(e,2)}> Topics </Button>
                 </Grid>
-            </Grid>
-            <h1> Quiz Table </h1>
-            <h1> </h1>
-            <div> </div>
+            </Grid>          
             {courseMode === 0? <QuizTable />:null}
             {courseMode === 1? <TaskTable />:null}
             {courseMode === 2? <TopicsTable />:null}

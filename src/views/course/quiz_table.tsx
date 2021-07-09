@@ -43,6 +43,7 @@ const QuizTable:React.FC = () => {
 
     const quizList2 = quizzes?.quizzes.map((quiz:Quiz) => {
         return(
+            <Grid item xs={12} md={6} lg={4}>
             <Card>
                 <CardContent>
                     <Typography variant="h4"> 
@@ -58,6 +59,7 @@ const QuizTable:React.FC = () => {
                     </Button> 
                 </CardActions>
             </Card>
+            </Grid>
         );
     })
 
@@ -77,24 +79,18 @@ const QuizTable:React.FC = () => {
 
     return (
         <div>
+            {quizList2}
             <Grid container>
                 {quizAddDialog}
-                <Grid item>
+                <Grid item xs={12} xl={12}>
                     <IconButton>
                         <AddIcon onClick={(e) => setQuiz({...quiz, open:true})}/>
                     </IconButton>
                 </Grid>
-                    <Grid container item justify="center" alignItems="center" xs={12} xl={12}>
-                        <Box>
-                            <Typography variant='h3' color='primary'>
-                                Quiz : 
-                            </Typography>
-                        </Box>
-                    </Grid>
-                <Grid item xs={5} xl={5}>
-                        {quizList2}
+                <Grid item xs={12} xl={12}>
                 </Grid>
             </Grid>
+            {quizList2}
         </div>
     );
 }
